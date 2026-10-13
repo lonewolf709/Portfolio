@@ -20,9 +20,8 @@ A responsive student portfolio built with plain HTML, CSS and JavaScript. No fra
 ## How to run
 Open `index.html` in a browser, or publish with GitHub Pages: Settings, Pages, Deploy from a branch, `main` and `/ (root)`.
 
-## Editing
-Open the page with `?edit` at the end of the link (for example `.../index.html?edit`) to show the edit buttons.
-Edits are saved in that browser only. To change what everyone sees, update the `BAKED` data near the top of the script in `index.html`.
+
+
 
 ## Built with
 HTML, CSS and vanilla JavaScript. Fonts: Poppins (Google Fonts).
