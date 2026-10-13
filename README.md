@@ -2,7 +2,7 @@
 
 A responsive student portfolio built with plain HTML, CSS and JavaScript. No frameworks or build step.
 
-**Live demo:** https://lonewolf709.github.io/Portfolio/
+**Live demo:** https://samadgour.github.io/Portfolio/
 
 ## What it shows
 - Dashboard: profile and intro, quick stats, academics, goals, CGPA ring and contact links
