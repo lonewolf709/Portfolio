@@ -217,7 +217,7 @@ body[data-edit=on] #ed svg{transform:rotate(-20deg) scale(1.12)}
 [hidden]{display:none!important}
 .pa{position:relative}.pa img{position:absolute;inset:0}
 </style></head><body>
-<header id="hd"><a class="logo" href="#home" aria-label="Back to top"><span class="bw"><span class="bt">Portfolio</span></span></a><div class="hb"><button id="ed" aria-label="Show or hide edit buttons" title="Show / hide edit buttons"><span data-ic="pencil"></span></button><button id="md" aria-label="Light or dark"></button></div></header>
+<header id="hd"><a class="logo" href="#home" aria-label="Back to top"><span class="bw"><span class="bt">Portfolio</span></span></a><div class="hb"><button id="pub" aria-label="Publish changes to the live site" title="Publish changes to the live site">↑</button><button id="ed" aria-label="Show or hide edit buttons" title="Show / hide edit buttons"><span data-ic="pencil"></span></button><button id="md" aria-label="Light or dark"></button></div></header>
 <main>
 <section id="home"></section><section id="skills"></section><section id="projects"></section><section id="certs"></section>
 <section id="contact"><div class="sh"><h2><span data-ic="mail"></span> Contact</h2></div><div class="c w"><form id="f" novalidate>
@@ -232,6 +232,174 @@ body[data-edit=on] #ed svg{transform:rotate(-20deg) scale(1.12)}
 <nav class="nav"><a href="#home" class="on"><span data-ic="cap"></span>Dashboard</a><a href="#skills"><span data-ic="code"></span>Skills</a><a href="#projects"><span data-ic="folder"></span>Projects</a><a href="#certs"><span data-ic="award"></span>Certs</a><a href="#contact"><span data-ic="mail"></span>Contact</a></nav>
 <dialog id="dg"></dialog><dialog id="sd"></dialog>
 <script>
+/*CONTENT-START*/
+/*
+  ====== EDIT YOUR PORTFOLIO HERE ======
+  1. Change the text between the quotes (keep the quotes and commas).
+  2. Save this file, commit it to GitHub, and the live site updates in 1-2 minutes.
+  - profile  : name, role, bio, email, links (gh = GitHub, li = LinkedIn, site = website), college, cgpa...
+  - skills   : your skills list
+  - minor    : small projects shown under each skill ("skill" = id of the skill)
+  - projects : big projects (title, ds = description, tech, gh = GitHub link, demo = live demo link)
+  - certs    : certificates
+*/
+var BAKED = {
+  "v2": 1,
+  "v4": 1,
+  "viewMode": true,
+  "theme": {
+    "mode": "light"
+  },
+  "profile": {
+    "name": "Samad Gour",
+    "role": "B.Tech CSE · Full-Stack Developer",
+    "bio": "I build AI-powered web apps for real-world problems. Growing into a full-stack and AI/ML engineer.",
+    "edu": "B.Tech in Computer Science",
+    "goal": "Land a software engineering internship and grow into a full-stack engineer.",
+    "gshort": "",
+    "glong": "",
+    "loc": "Sharanpur",
+    "email": "samadsamad4053@gmail.com",
+    "gh": "https://github.com/samadgour",
+    "li": "https://www.linkedin.com/in/samad-gour-28aa15409",
+    "site": "https://gdbsb.com",
+    "resume": "resume.pdf",
+    "college": "Sug",
+    "year": "2/3",
+    "grad": "2029",
+    "cgpa": "7.675",
+    "focus": "",
+    "photo": "IMG_20260515_093006_418.webp"
+  },
+  "skills": [
+    {
+      "id": 101,
+      "name": "HTML / CSS",
+      "note": "Responsive layouts"
+    },
+    {
+      "id": 102,
+      "name": "JavaScript",
+      "note": "ES6+ and the DOM"
+    },
+    {
+      "id": 103,
+      "name": "React",
+      "note": "Component-based UIs"
+    },
+    {
+      "id": 104,
+      "name": "TypeScript",
+      "note": "Typed front-end code"
+    },
+    {
+      "id": 105,
+      "name": "Tailwind CSS",
+      "note": "Utility-first styling"
+    },
+    {
+      "id": 106,
+      "name": "Python / FastAPI",
+      "note": "Learning: backend and AI/ML"
+    }
+  ],
+  "minor": [
+    {
+      "id": 201,
+      "skill": 101,
+      "title": "CampusFix pages",
+      "ds": "Student dashboard and HOD Command Center screens.",
+      "link": "",
+      "img": ""
+    },
+    {
+      "id": 202,
+      "skill": 101,
+      "title": "Canteen ordering screens",
+      "ds": "Menu, cart and pickup-slot pages.",
+      "link": "",
+      "img": ""
+    },
+    {
+      "id": 203,
+      "skill": 102,
+      "title": "CampusFix complaint flow",
+      "ds": "Complaints raised by students show up in the HOD Command Center.",
+      "link": "",
+      "img": ""
+    },
+    {
+      "id": 204,
+      "skill": 102,
+      "title": "Portfolio website",
+      "ds": "This responsive portfolio with light and dark modes.",
+      "link": "",
+      "img": ""
+    },
+    {
+      "id": 205,
+      "skill": 103,
+      "title": "SUG RED",
+      "ds": "Campus network for students, seniors, alumni and mentors.",
+      "link": "",
+      "img": ""
+    },
+    {
+      "id": 206,
+      "skill": 104,
+      "title": "SUG RED front end",
+      "ds": "Typed components for the SUG RED screens.",
+      "link": "",
+      "img": ""
+    },
+    {
+      "id": 207,
+      "skill": 105,
+      "title": "SUG RED design system",
+      "ds": "Black, white and red styling with a red-dot motif.",
+      "link": "",
+      "img": ""
+    }
+  ],
+  "projects": [
+    {
+      "id": 1,
+      "title": "CampusFix",
+      "ds": "Campus complaint system: students report issues and the HOD resolves them from a command center.",
+      "tech": "HTML, CSS, JavaScript",
+      "gh": "",
+      "demo": ""
+    },
+    {
+      "id": 2,
+      "title": "University Canteen Management",
+      "ds": "Full-stack canteen ordering with pickup slots, live order status and an admin panel.",
+      "tech": "Full-stack, Admin panel",
+      "gh": "",
+      "demo": ""
+    },
+    {
+      "id": 3,
+      "title": "SUG RED",
+      "ds": "University network linking students, alumni and mentors to opportunities.",
+      "tech": "React, TypeScript, Tailwind CSS",
+      "gh": "",
+      "demo": ""
+    },
+    {
+      "id": 4,
+      "title": "Portfolio Website",
+      "ds": "This responsive portfolio with light and dark modes.",
+      "tech": "HTML, CSS, JavaScript",
+      "gh": "https://github.com/samadgour/Portfolio",
+      "demo": "https://samadgour.github.io/Portfolio/"
+    }
+  ],
+  "certs": []
+};
+/*CONTENT-END*/
+</script>
+<script>
 var K="portfolio.v1",$=function(s){return document.querySelector(s)};
 // Visitors on the live site get the built-in data (view only). Open the page with ?edit to edit, or open the file locally.
 var OWNER=/[?&]edit(=|&|$)/.test(location.search)||location.protocol=="file:";
@@ -240,7 +408,6 @@ var SK=[["HTML / CSS","Responsive layouts"],["JavaScript","ES6+ & DOM"],["React"
 function seed(){var t=Date.now();return{profile:Object.assign({},DP),v2:1,minor:[[0,"Landing page clone","Pixel-perfect responsive page built with Flexbox & Grid."],[1,"To-do app","DOM manipulation, events and saved tasks."],[2,"Weather widget","React hooks fetching a public weather API."],[3,"Notes REST API","CRUD endpoints with Express and JSON storage."],[4,"Number guessing game","Loops, functions and input handling."]].map(function(m,i){return{id:t+100+i,skill:t+m[0],title:m[1],ds:m[2],link:"",img:""}}),skills:SK.map(function(s,i){return{id:t+i,name:s[0],note:s[1]}}),
  projects:[{id:1,title:"Portfolio Website",ds:"This responsive bento-grid portfolio with light/dark themes.",tech:"HTML, CSS, JavaScript",gh:"",demo:""},{id:2,title:"TaskFlow",ds:"Kanban task manager with authentication and boards.",tech:"React, Node.js, MongoDB",gh:"",demo:""},{id:3,title:"AlgoViz",ds:"Visualizer for sorting, graph and DP algorithms.",tech:"JavaScript, Canvas",gh:"",demo:""}],
  certs:[{id:1,title:"Responsive Web Design",iss:"freeCodeCamp",dt:"2025-06-01",ln:""},{id:2,title:"Data Structures & Algorithms",iss:"NPTEL",dt:"2025-05-01",ln:""}],theme:{mode:"light"}}}
-var BAKED={"v2":1,"v4":1,"viewMode":true,"theme":{"mode":"light"},"profile":{"name":"Samad Gour","role":"B.Tech CSE · Full-Stack Developer","bio":"I build AI-powered web apps for real-world problems. Growing into a full-stack and AI/ML engineer.","edu":"B.Tech in Computer Science","goal":"Land a software engineering internship and grow into a full-stack engineer.","gshort":"","glong":"","loc":"Sharanpur","email":"samadsamad4053@gmail.com","gh":"https://github.com/samadgour","li":"https://www.linkedin.com/in/samad-gour-28aa15409","site":"https://gdbsb.com","resume":"resume.pdf","college":"Sug","year":"2/3","grad":"2029","cgpa":"7.675","focus":"","photo":"IMG_20260515_093006_418.webp"},"skills":[{"id":101,"name":"HTML / CSS","note":"Responsive layouts"},{"id":102,"name":"JavaScript","note":"ES6+ and the DOM"},{"id":103,"name":"React","note":"Component-based UIs"},{"id":104,"name":"TypeScript","note":"Typed front-end code"},{"id":105,"name":"Tailwind CSS","note":"Utility-first styling"},{"id":106,"name":"Python / FastAPI","note":"Learning: backend and AI/ML"}],"minor":[{"id":201,"skill":101,"title":"CampusFix pages","ds":"Student dashboard and HOD Command Center screens.","link":"","img":""},{"id":202,"skill":101,"title":"Canteen ordering screens","ds":"Menu, cart and pickup-slot pages.","link":"","img":""},{"id":203,"skill":102,"title":"CampusFix complaint flow","ds":"Complaints raised by students show up in the HOD Command Center.","link":"","img":""},{"id":204,"skill":102,"title":"Portfolio website","ds":"This responsive portfolio with light and dark modes.","link":"","img":""},{"id":205,"skill":103,"title":"SUG RED","ds":"Campus network for students, seniors, alumni and mentors.","link":"","img":""},{"id":206,"skill":104,"title":"SUG RED front end","ds":"Typed components for the SUG RED screens.","link":"","img":""},{"id":207,"skill":105,"title":"SUG RED design system","ds":"Black, white and red styling with a red-dot motif.","link":"","img":""}],"projects":[{"id":1,"title":"CampusFix","ds":"Campus complaint system: students report issues and the HOD resolves them from a command center.","tech":"HTML, CSS, JavaScript","gh":"","demo":""},{"id":2,"title":"University Canteen Management","ds":"Full-stack canteen ordering with pickup slots, live order status and an admin panel.","tech":"Full-stack, Admin panel","gh":"","demo":""},{"id":3,"title":"SUG RED","ds":"University network linking students, alumni and mentors to opportunities.","tech":"React, TypeScript, Tailwind CSS","gh":"","demo":""},{"id":4,"title":"Portfolio Website","ds":"This responsive portfolio with light and dark modes.","tech":"HTML, CSS, JavaScript","gh":"https://github.com/samadgour/Portfolio","demo":"https://samadgour.github.io/Portfolio/"}],"certs":[]};
 function load(){
  if(OWNER){try{var d=JSON.parse(localStorage.getItem(K));if(d&&d.skills)return d}catch(e){}}
  var n=JSON.parse(JSON.stringify(BAKED));
@@ -408,4 +575,41 @@ document.addEventListener("pointerdown",function(e){if(RM)return;var t=e.target.
  var r=t.getBoundingClientRect(),d=Math.max(r.width,r.height)*2.2,s=document.createElement("span");s.className="rp";
  s.style.cssText="width:"+d+"px;height:"+d+"px;left:"+(e.clientX-r.left-d/2)+"px;top:"+(e.clientY-r.top-d/2)+"px";t.appendChild(s);setTimeout(function(){s.remove()},650)},{passive:true});
 icons();applyTheme();render();navSoon();
+
+/* ---- Publish button (owner only): saves your edits into index.html on GitHub so they go live ---- */
+(function(){
+var b=$("#pub");if(!b)return;if(!OWNER){b.hidden=true;return}
+var KT="portfolio.ghtoken";
+var HEAD="/*\n  ====== EDIT YOUR PORTFOLIO HERE ======\n  1. Change the text between the quotes (keep the quotes and commas).\n  2. Save the file, commit it to GitHub, and the live site updates in 1-2 minutes.\n  - profile  : name, role, bio, email, links (gh = GitHub, li = LinkedIn, site = website), college, cgpa...\n  - skills   : your skills list\n  - minor    : small projects shown under each skill (\"skill\" = id of the skill)\n  - projects : big projects (title, ds = description, tech, gh = GitHub link, demo = live demo link)\n  - certs    : certificates\n*/\n";
+function repo(){var m=location.hostname.match(/^(.+)\.github\.io$/),p=location.pathname.split("/")[1];return{o:m?m[1]:"samadgour",r:(m&&p)?p:"Portfolio",f:"index.html"}}
+function b64(s){var by=new TextEncoder().encode(s),bin="";for(var i=0;i<by.length;i+=32768)bin+=String.fromCharCode.apply(null,by.subarray(i,i+32768));return btoa(bin)}
+function block(){var d=JSON.parse(JSON.stringify(S));d.viewMode=true;d.theme=BAKED.theme||{mode:"light"};return"/*CONTENT-START*/\n"+HEAD+"var BAKED = "+JSON.stringify(d,null,2)+";\n/*CONTENT-END*/"}
+b.onclick=async function(){
+ var t=localStorage.getItem(KT);
+ if(!t){
+  t=prompt("First time only: paste your GitHub token.\n\nCreate one at github.com/settings/personal-access-tokens/new\n- Repository access: Only select repositories -> Portfolio\n- Permissions: Contents -> Read and write\n\nIt is saved only in this browser.");
+  if(!t)return;t=t.trim();
+ }
+ var r=repo(),url="https://api.github.com/repos/"+r.o+"/"+r.r+"/contents/"+r.f,
+  H={Authorization:"Bearer "+t,Accept:"application/vnd.github+json"};
+ b.disabled=true;var old=b.textContent;b.textContent="…";
+ try{
+  var g=await fetch(url,{headers:H});
+  if(g.status==401||g.status==403){localStorage.removeItem(KT);throw new Error("GitHub did not accept the token. Click Publish again and paste a new one.")}
+  if(!g.ok)throw new Error("Could not find "+r.f+" in the "+r.r+" repo ("+g.status+").");
+  var sha=(await g.json()).sha;
+  var rw=await fetch(url,{headers:Object.assign({},H,{Accept:"application/vnd.github.raw+json"})});
+  if(!rw.ok)throw new Error("Could not read "+r.f+" ("+rw.status+").");
+  var cur=await rw.text(),re=/\/\*CONTENT-START\*\/[\s\S]*?\/\*CONTENT-END\*\//;
+  if(!re.test(cur))throw new Error("The index.html in your repo is the old version. Upload the new index.html first.");
+  var nb=block(),next=cur.replace(re,function(){return nb});
+  var p=await fetch(url,{method:"PUT",headers:Object.assign({"Content-Type":"application/json"},H),body:JSON.stringify({message:"Update portfolio from edit mode",content:b64(next),sha:sha})});
+  if(p.status==401||p.status==403||p.status==404){localStorage.removeItem(KT);throw new Error("GitHub refused the save. Check the token has Contents: Read and write on the "+r.r+" repo, then try again.")}
+  if(!p.ok)throw new Error("Save failed ("+p.status+").");
+  localStorage.setItem(KT,t);
+  alert("Published! Your changes will be live in 1-2 minutes. Then hard refresh the live site (Ctrl+Shift+R).");
+ }catch(e){alert(e.message||"Something went wrong.")}
+ b.disabled=false;b.textContent=old;
+};
+})();
 </script></body></html>
