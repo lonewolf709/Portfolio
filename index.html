@@ -581,7 +581,7 @@ icons();applyTheme();render();navSoon();
 var b=$("#pub");if(!b)return;if(!OWNER){b.hidden=true;return}
 var KT="portfolio.ghtoken";
 var HEAD="/*\n  ====== EDIT YOUR PORTFOLIO HERE ======\n  1. Change the text between the quotes (keep the quotes and commas).\n  2. Save the file, commit it to GitHub, and the live site updates in 1-2 minutes.\n  - profile  : name, role, bio, email, links (gh = GitHub, li = LinkedIn, site = website), college, cgpa...\n  - skills   : your skills list\n  - minor    : small projects shown under each skill (\"skill\" = id of the skill)\n  - projects : big projects (title, ds = description, tech, gh = GitHub link, demo = live demo link)\n  - certs    : certificates\n*/\n";
-function repo(){var m=location.hostname.match(/^(.+)\.github\.io$/),p=location.pathname.split("/")[1];return{o:m?m[1]:"samadgour",r:(m&&p)?p:"Portfolio",f:"index.html"}}
+function repo(){var m=location.hostname.match(/^(.+)\.github\.io$/),p=location.pathname.split("/")[1];return{o:m?m[1]:"samadgour",r:m?(p||location.hostname):"Portfolio",f:"index.html"}}
 function b64(s){var by=new TextEncoder().encode(s),bin="";for(var i=0;i<by.length;i+=32768)bin+=String.fromCharCode.apply(null,by.subarray(i,i+32768));return btoa(bin)}
 function block(){var d=JSON.parse(JSON.stringify(S));d.viewMode=true;d.theme=BAKED.theme||{mode:"light"};return"/*CONTENT-START*/\n"+HEAD+"var BAKED = "+JSON.stringify(d,null,2)+";\n/*CONTENT-END*/"}
 b.onclick=async function(){
@@ -598,17 +598,28 @@ b.onclick=async function(){
   if(g.status==401||g.status==403){localStorage.removeItem(KT);throw new Error("GitHub did not accept the token. Click Publish again and paste a new one.")}
   if(!g.ok)throw new Error("Could not find "+r.f+" in the "+r.r+" repo ("+g.status+").");
   var sha=(await g.json()).sha;
-  var rw=await fetch(url,{headers:Object.assign({},H,{Accept:"application/vnd.github.raw+json"})});
-  if(!rw.ok)throw new Error("Could not read "+r.f+" ("+rw.status+").");
-  var cur=await rw.text(),re=/\/\*CONTENT-START\*\/[\s\S]*?\/\*CONTENT-END\*\//;
-  if(!re.test(cur))throw new Error("The index.html in your repo is the old version. Upload the new index.html first.");
-  var nb=block(),next=cur.replace(re,function(){return nb});
+  var RG=/\/\*CONTENT-START\*\/[\s\S]*?\/\*CONTENT-END\*\//,cur="",info=[];
+  try{var sv=await fetch(location.origin+location.pathname,{cache:"no-store"});if(sv.ok){var st=await sv.text();info.push("live page "+st.length+" chars, markers "+(RG.test(st)?"yes":"no"));if(RG.test(st))cur=st}}catch(e1){info.push("live page not readable")}
+  if(!cur){var rw=await fetch(url,{headers:Object.assign({},H,{Accept:"application/vnd.github.raw+json"})});
+   if(rw.ok){var rt=await rw.text();info.push("repo file "+rt.length+" chars, markers "+(RG.test(rt)?"yes":"no"));if(RG.test(rt))cur=rt}else info.push("repo file read failed ("+rw.status+")")}
+  if(!cur)throw new Error("Could not find the CONTENT-START marker. Checked "+r.o+"/"+r.r+": "+info.join("; ")+". Send me this message.");
+  var nb=block(),next=cur.replace(RG,function(){return nb});
   var p=await fetch(url,{method:"PUT",headers:Object.assign({"Content-Type":"application/json"},H),body:JSON.stringify({message:"Update portfolio from edit mode",content:b64(next),sha:sha})});
   if(p.status==401||p.status==403||p.status==404){localStorage.removeItem(KT);throw new Error("GitHub refused the save. Check the token has Contents: Read and write on the "+r.r+" repo, then try again.")}
   if(!p.ok)throw new Error("Save failed ("+p.status+").");
   localStorage.setItem(KT,t);
   alert("Published! Your changes will be live in 1-2 minutes. Then hard refresh the live site (Ctrl+Shift+R).");
- }catch(e){alert(e.message||"Something went wrong.")}
+ }catch(e){
+  alert(e.message||"Something went wrong.");
+  if(confirm("Download the updated index.html instead? You can upload it to GitHub yourself (Add file -> Upload files).")){
+   try{
+    var hp=await fetch(location.origin+location.pathname,{cache:"no-store"}),ht=await hp.text(),rg=/\/\*CONTENT-START\*\/[\s\S]*?\/\*CONTENT-END\*\//;
+    if(!rg.test(ht))throw 0;
+    var nb2=block(),f=ht.replace(rg,function(){return nb2}),a=document.createElement("a");
+    a.href=URL.createObjectURL(new Blob([f],{type:"text/html"}));a.download="index.html";document.body.appendChild(a);a.click();a.remove();
+   }catch(x){alert("Could not prepare the download. Please edit the file directly on GitHub.")}
+  }
+ }
  b.disabled=false;b.textContent=old;
 };
 })();
